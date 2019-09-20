@@ -1,5 +1,7 @@
 package com.common.tools;
 
+import org.springframework.util.CollectionUtils;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -43,5 +45,46 @@ public class OperationListUtils {
         }else{
             return false;
         }
+    }
+
+    /**
+     * 集合转string
+     * @param list
+     * @return
+     */
+    public static String listToString(List<String> list) {
+        String convertedListStr = "";
+        if (!CollectionUtils.isEmpty(list)) {
+            String[] mListArray = list.toArray(new String[list.size()]);
+            for (int i = 0; i < mListArray.length; i++) {
+                if (i < mListArray.length - 1) {
+                    convertedListStr += mListArray[i] + ",";
+                } else {
+                    convertedListStr += mListArray[i];
+                }
+            }
+            return convertedListStr;
+        } else return "List is null!!!";
+    }
+
+    /**
+     * 集合转string
+     * @param list
+     * @return
+     */
+    public static String listToString2(List<String> list) {
+        final String SEPARATOR = ",";
+        StringBuilder sb = new StringBuilder();
+        String convertedListStr = "";
+        if (!CollectionUtils.isEmpty(list)) {
+            for (String item : list) {
+                sb.append(item);
+                sb.append(SEPARATOR);
+            }
+            convertedListStr = sb.toString();
+            convertedListStr = convertedListStr.substring(0, convertedListStr.length()
+                    - SEPARATOR.length());
+            return convertedListStr;
+        } else return "List is null!!!";
     }
 }
